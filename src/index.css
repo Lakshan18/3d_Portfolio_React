@@ -1,18 +1,34 @@
 @import "tailwindcss";
 
-html,body {
-  width: 100vw;
-  background-color: black;
-  color: white;
+.html,body{
+  @apply w-full h-full;
+  background: linear-gradient(90deg,#1C0A2E,#231135,#1F0B34,#170A23);
 }
 
-@theme{
-  --color-white-50: #d9ecff;
-  --color-blue-100: #2d2d38;
+@font-face{
+  font-family: 'Quicksand-Reg';
+  src: url('../fonts/Quicksand-Regular.ttf') format('truetype'); 
 }
 
-@layer utilities{
-  .flex-center {
-    @apply flex items-center justify-center;
-  }
+.sec1Bg {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
 }
+
+.sec1Bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('../public/portfolio_bg_sec1.png') center/cover no-repeat;
+  opacity: 0.4;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.sec1Bg > * {
+  position: relative;
+  z-index: 1;
+}
+
