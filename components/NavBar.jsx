@@ -1,85 +1,156 @@
 import { Link } from 'react-router-dom';
 import { styles } from '../styles';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const NavBar = () => {
-
-    const [active, setActive] = useState("");
+    const [active, setActive] = useState('');
     const [toggle, setToggle] = useState(false);
 
-    const navLinks = ["Home", "About", "Work", "Contact"];
+    const navLinks = [
+        { id: "1", name: "Home" },
+        { id: "2", name: "About" },
+        { id: "3", name: "Work" },
+        { id: "4", name: "Contact" },
+    ];
 
-    // Set "Home" as the default active nav link on initial load
-    useState(() => {
+    useEffect(() => {
         setActive("Home");
     }, []);
 
     return (
         <nav className={`${styles.paddingX} w-full flex items-center py-5 fixed top-0 z-20 bg-primary`}>
-            <div className='w-full flex justify-between items-center bg-[rgb(217,217,217,0.14)] rounded-[25px] px-6 py-2'>
+            {/* Desktop nav bar */}
+            <div className='w-full xl:flex lg:flex md:flex hidden justify-between items-center bg-[rgba(217,217,217,0.06)] rounded-[25px] px-6 py-2'>
                 <Link to="/" className='flex items-center gap-2' onClick={() => {
                     setActive("Home");
                     window.scrollTo(0, 0);
-                }}
-                >
+                }}>
                     <img src="./nav_img1.png" alt="logo" className='w-10 h-10 object-contain' />
                 </Link>
                 <div className='grid'>
-                    {/* Desktop view */}
-                    <div className='hidden md:flex lg:flex xl:flex items-center justify-between gap-8'>
-                        {navLinks.map((text) => (
-                            <div
-                                key={text}
-                                className={`relative group cursor-pointer ${active === text ? "active-nav" : ""}`}
+                    <ul className='hidden md:flex lg:flex xl:flex items-center justify-between gap-8'>
+                        {navLinks.map((link) => (
+                            <li
+                                key={link.id}
+                                className={`relative group cursor-pointer duration-300 transition-all ${active === link.name ? "text-white" : "text-[#C1B2D5] hover:text-purple-200"}`}
                                 style={{ padding: '6px 10px', borderRadius: '8px' }}
-                                onClick={() => setActive(text)}
+                                onClick={() => setActive(link.name)}
                             >
-                                <span className={`${styles.NavLinkText}`}>{text}</span>
+                                <span className={`${styles.NavLinkText}`}>{link.name}</span>
                                 <svg
                                     className="absolute top-0 left-0 w-full h-full pointer-events-none"
                                     style={{ borderRadius: '8px' }}
                                 >
                                     <rect
-                                        className={`stroke-[#F0AEFF] stroke-2 ${active === text ? "opacity-100" : "opacity-0 group-hover:opacity-100 animate-square-border"}`}
+                                        className={`stroke-[#F0AEFF] stroke-2 ${active === link.name ? "opacity-100" : "opacity-0 group-hover:opacity-100 animate-square-border"}`}
                                         x="2%" y="2%" width="96%" height="96%"
                                         fill="none"
                                         strokeDasharray="376"
-                                        strokeDashoffset={active === text ? "0" : "376"}
+                                        strokeDashoffset={active === link.name ? "0" : "376"}
                                         rx="8" ry="8"
                                     />
                                 </svg>
-                            </div>
+                            </li>
                         ))}
-                    </div>
+                    </ul>
                 </div>
-                <div className='lg:grid md:grid hidden'>
+                <div className='xl:grid lg:grid md:grid hidden'>
                     <div className='flex items-center gap-3'>
-                        <img src="./facebook_ic.png" className='w-6 h-6 object-contain' alt="" />
-                        <img src="./github_ic.png" className='w-6 h-6 object-contain' alt="" />
-                        <img src="./twitterX_ic.png" className='w-6 h-6 object-contain' alt="" />
+                        <img src="./facebook_ic.png" className='w-5 h-5 object-contain' alt="facebook" />
+                        <img src="./github_ic.png" className='w-5 h-5 object-contain' alt="github" />
+                        <img src="./twitterX_ic.png" className='w-5 h-5 object-contain' alt="twitter" />
                     </div>
                 </div>
-
-                {/* mobile view */}
+                {/* mobile view with menu */}
                 <div className='md:hidden lg:hidden xl:hidden flex flex-1 justify-end items-center'>
-                    <img src={toggle ? "./menu_icon.png" : "./menu_close_icon.png"} alt='menu' className='w-7 h-7 object-contain cursor-pointer'
+                    <img src={toggle ? "./menu_close_icon.png" : "./menu_icon.png"} alt='menu' className='w-7 h-7 object-contain cursor-pointer'
                         onClick={() => setToggle(!toggle)}
                     />
                     <div className={`${!toggle ? 'hidden' : 'flex'} p-6 bg-secondary absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar`}>
                         <ul className='list-none flex justify-end items-start flex-col gap-4'>
-                            {navLinks.map((text) => (
+                            {navLinks.map((link) => (
                                 <li
-                                    key={text}
-                                    className={`cursor-pointer px-3 py-2 rounded-md ${active === text ? "text-[#F0AEFF] font-bold bg-[rgba(240,174,255,0.08)]" : "text-white"}`}
-                                    onClick={() => setActive(text)}
+                                    key={link.id}
+                                    className={`cursor-pointer px-3 py-2 rounded-md ${active === link.name ? "text-[#F0AEFF] font-bold bg-[rgba(240,174,255,0.08)]" : "text-white"}`}
+                                    onClick={() => {
+                                        setActive(link.name);
+                                        setToggle(false);
+                                    }}
                                 >
-                                    <span className={`${styles.NavLinkText}`}>{text}</span>
+                                    <span className={`${styles.NavLinkText}`}>{link.name}</span>
                                 </li>
                             ))}
                         </ul>
                     </div>
                 </div>
             </div>
+
+            {/* Mobile Nav bar */}
+            <div className={`w-full flex lg:hidden xl:hidden md:hidden 2xl:hidden justify-between items-center rounded-[25px] px-6 py-2`}>
+                <Link to="/" className='flex items-center gap-2' onClick={() => {
+                    setActive("Home");
+                    window.scrollTo(0, 0);
+                }}>
+                    <img src="./nav_img1.png" alt="logo" className='w-10 h-10 object-contain' />
+                </Link>
+                <div className='grid'>
+                    <ul className='hidden md:flex lg:flex xl:flex items-center justify-between gap-8'>
+                        {navLinks.map((link) => (
+                            <li
+                                key={link.id}
+                                className={`relative group cursor-pointer duration-300 transition-all ${active === link.name ? "text-purple-200" : "text-white hover:text-purple-200"}`}
+                                style={{ padding: '6px 10px', borderRadius: '8px' }}
+                                onClick={() => setActive(link.name)}
+                            >
+                                <span className={`${styles.NavLinkText}`}>{link.name}</span>
+                                <svg
+                                    className="absolute top-0 left-0 w-full h-full pointer-events-none"
+                                    style={{ borderRadius: '8px' }}
+                                >
+                                    <rect
+                                        className={`stroke-[#F0AEFF] stroke-2 ${active === link.name ? "opacity-100" : "opacity-0 group-hover:opacity-100 animate-square-border"}`}
+                                        x="2%" y="2%" width="96%" height="96%"
+                                        fill="none"
+                                        strokeDasharray="376"
+                                        strokeDashoffset={active === link.name ? "0" : "376"}
+                                        rx="8" ry="8"
+                                    />
+                                </svg>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+                <div className='lg:grid md:grid hidden'>
+                    <div className='flex items-center gap-3'>
+                        <img src="./facebook_ic.png" className='w-6 h-6 object-contain' alt="facebook" />
+                        <img src="./github_ic.png" className='w-6 h-6 object-contain' alt="github" />
+                        <img src="./twitterX_ic.png" className='w-6 h-6 object-contain' alt="twitter" />
+                    </div>
+                </div>
+                {/* mobile view with menu */}
+                <div className='md:hidden lg:hidden xl:hidden flex flex-1 justify-end items-center'>
+                    <img src={toggle ? "./menu_close_icon.png" : "./menu_icon.png"} alt='menu' className='w-7 h-7 object-contain cursor-pointer'
+                        onClick={() => setToggle(!toggle)}
+                    />
+                    <div className={`${!toggle ? 'hidden' : 'flex'} p-6 bg-secondary absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar`}>
+                        <ul className='list-none flex justify-end items-start flex-col gap-4'>
+                            {navLinks.map((link) => (
+                                <li
+                                    key={link.id}
+                                    className={`cursor-pointer px-3 py-2 rounded-md ${active === link.name ? "text-[#F0AEFF] font-bold bg-[rgba(240,174,255,0.08)]" : "text-white"}`}
+                                    onClick={() => {
+                                        setActive(link.name);
+                                        setToggle(false);
+                                    }}
+                                >
+                                    <span className={`${styles.NavLinkText}`}>{link.name}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
             <style jsx="true">{`
               .group:hover .animate-square-border {
                 animation: square-border-anim 0.7s linear forwards;
@@ -102,7 +173,7 @@ const NavBar = () => {
               }
             `}</style>
         </nav>
-    )
-}
+    );
+};
 
-export default NavBar
+export default NavBar;
