@@ -1,6 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion';
 import { styles } from '../styles';
+import Computers from '../models/Computers';
 
 const Section1Dev = () => {
     return (
@@ -18,7 +19,14 @@ const Section1Dev = () => {
                         with a passion for creating dynamic and responsive web applications.
                     </p>
                 </div>
+                <div className='flex flex-row items-center w-[40%] gap-3 justify-between'>
+                    <div className='w-[300px] h-[40px] bg-[#DEDEDE] rounded-sm border border-purple-400'></div>
+                    <div className='w-[100px] h-[100px]'>
+                        <img src="./side_images/developer1.png" className='w-[100%] h-[100%] object-contain' alt="" />
+                    </div>
+                </div>
             </div>
+            <Computers />
         </div>
     )
 }
