@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 const NavBar = () => {
     const [active, setActive] = useState('');
     const [toggle, setToggle] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
 
     const navLinks = [
         { id: "1", name: "Home" },
@@ -15,12 +16,24 @@ const NavBar = () => {
 
     useEffect(() => {
         setActive("Home");
+
+        const handleScroll = () => {
+            const scrollTop = window.scrollY;
+            if (scrollTop > 50) {
+                setScrolled(true);
+            } else {
+                setScrolled(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     return (
-        <nav className={`${styles.paddingX} w-full flex items-center py-5 fixed top-0 z-20 bg-primary`}>
-            {/* Desktop nav bar */}
-            <div className='w-full xl:flex lg:flex md:flex hidden justify-between items-center bg-[rgba(217,217,217,0.06)] rounded-[25px] px-6 py-2'>
+        <nav className={`${styles.paddingX} w-full flex items-center py-5 fixed top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-[#150f25] backdrop-blur-sm bg-opacity-90' : 'bg-transparent'
+            }`}>
+            <div className={`w-full xl:flex lg:flex md:flex hidden justify-between items-center rounded-[25px] px-6 py-2 transition-all duration-300 ${scrolled ? 'bg-[#2f2842]' : 'bg-[rgba(217,217,217,0.06)]'}`}>
                 <Link to="/" className='flex items-center gap-2' onClick={() => {
                     setActive("Home");
                     window.scrollTo(0, 0);
@@ -61,7 +74,6 @@ const NavBar = () => {
                         <img src="./twitterX_ic.png" className='w-5 h-5 object-contain' alt="twitter" />
                     </div>
                 </div>
-                {/* mobile view with menu */}
                 <div className='md:hidden lg:hidden xl:hidden flex flex-1 justify-end items-center'>
                     <img src={toggle ? "./menu_close_icon.png" : "./menu_icon.png"} alt='menu' className='w-7 h-7 object-contain cursor-pointer'
                         onClick={() => setToggle(!toggle)}
@@ -85,7 +97,6 @@ const NavBar = () => {
                 </div>
             </div>
 
-            {/* Mobile Nav bar */}
             <div className={`w-full flex lg:hidden xl:hidden md:hidden 2xl:hidden justify-between items-center rounded-[25px] px-6 py-2`}>
                 <Link to="/" className='flex items-center gap-2' onClick={() => {
                     setActive("Home");

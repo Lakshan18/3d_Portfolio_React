@@ -12,14 +12,25 @@
   --breakpoint-3xl: 1580px;
 }
 
-.html,body{
+.html,
+body {
   @apply w-full h-full;
-  background: linear-gradient(90deg,#1C0A2E,#231135,#1F0B34,#170A23);
+  background: linear-gradient(90deg, #1C0A2E, #231135, #1F0B34, #170A23);
 }
 
-@font-face{
+@font-face {
   font-family: 'Quicksand-Reg';
-  src: url('../fonts/Quicksand-Regular.ttf') format('truetype'); 
+  src: url('../fonts/Quicksand-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto-Reg';
+  src: url('../fonts/Roboto.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto-Flex';
+  src: url('../fonts/Roboto_Flex.ttf') format('truetype');
 }
 
 .sec1Bg {
@@ -38,7 +49,7 @@
   pointer-events: none;
 }
 
-.sec1Bg > * {
+.sec1Bg>* {
   position: relative;
   z-index: 1;
 }
@@ -46,6 +57,3 @@
 .violet-gradient {
   background: linear-gradient(180deg, #621dd8 0%, #c9bce023 65%, #ffffff00 100%);
 }
-
-
-
