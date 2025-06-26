@@ -1,0 +1,11 @@
+Model Information:
+* title:	Diamond Ball
+* source:	https://sketchfab.com/3d-models/diamond-ball-8e1fde9b90c642e38e3644460d27f9c6
+* author:	corbaanton (https://sketchfab.com/corbaanton)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Diamond Ball" (https://sketchfab.com/3d-models/diamond-ball-8e1fde9b90c642e38e3644460d27f9c6) by corbaanton (https://sketchfab.com/corbaanton) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

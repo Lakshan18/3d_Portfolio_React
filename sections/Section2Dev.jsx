@@ -13,7 +13,7 @@ const Section2Dev = () => {
     ];
 
     return (
-        <div className={`${styles.customGradientHorizontal} w-full min-h-screen px-[5%] py-[5%] relative overflow-hidden`}>
+        <div className={`${styles.customGradientHorizontal} w-full min-h-screen px-[3%] py-[5%] relative overflow-hidden`}>
             <div className="w-full mx-auto">
                 <div className="flex flex-col justify-start mb-16">
                     <span className={`${styles.subTopicText}`}>introduction</span>

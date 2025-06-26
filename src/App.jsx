@@ -1,7 +1,8 @@
 import NavBar from "../components/NavBar";
-import Section1Dev from "../pages/Section1Dev";
+import Section1Dev from "../sections/Section1Dev";
 import { BrowserRouter } from "react-router-dom";
-import Section2Dev from "../pages/Section2Dev";
+import Section2Dev from "../sections/Section2Dev";
+import Section3Dev from "../sections/Section3Dev";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
             <Section1Dev />
           </div>
           <Section2Dev />
+          <Section3Dev />
         </div>
       </div>
     </BrowserRouter>
