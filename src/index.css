@@ -58,3 +58,16 @@ body {
 .violet-gradient {
   background: linear-gradient(180deg, #621dd8 0%, #c9bce023 65%, #ffffff00 100%);
 }
+
+.dev-sphere {
+  background: radial-gradient(circle at 50% 45%, #7c4dff 70%, #37254E 100%);
+  border-radius: 9999px;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  position: relative;
+  overflow: visible;
+}
